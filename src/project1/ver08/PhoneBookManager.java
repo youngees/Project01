@@ -1,4 +1,4 @@
-package project1.ver07;
+package project1.ver08;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -16,28 +16,6 @@ public class PhoneBookManager
 	public PhoneBookManager(int num) {
 		PhoneSet = new HashSet<PhoneInfo>();
 	}
-//	//중복체크
-//	public void redun(String name) {
-//		String recheck;
-//		
-//		for(PhoneInfo redun : PhoneSet) {
-//			if(name.equals(redun.getName())){
-//				System.out.println("이미 저장된 데이터입니다.");
-//				System.out.println("덮어쓸까요? Y(y) / N(n)");
-//				recheck = scanner.nextLine();
-//				
-//				if(recheck.equalsIgnoreCase("Y")) {
-//					PhoneSet.remove(redun);
-//					System.out.println("입력한 정보가 저장되었습니다.");
-//				}
-//				else if(recheck.equalsIgnoreCase("N")) {
-//					System.out.println("기존 정보를 유지합니다.");
-//					redun.showPhoneInfo();
-//				}
-//			}
-//		}
-//	}
-	
 	//메뉴출력
 	public void printMenu() {
 		System.out.println("메뉴를 선택하세요.");
@@ -48,7 +26,27 @@ public class PhoneBookManager
 		System.out.println("5.프로그램 종료");
 		System.out.print("메뉴선택:");
 	}
-	
+	//중복체크
+	public void redun(String name) {
+		String recheck;
+		
+		for(PhoneInfo redun : PhoneSet) {
+			if(name.equals(redun.getName())){
+				System.out.println("이미 저장된 데이터입니다.");
+				System.out.println("덮어쓸까요? Y(y) / N(n)");
+				recheck = scanner.nextLine();
+				
+				if(recheck.equalsIgnoreCase("Y")) {
+					PhoneSet.remove(redun);
+					System.out.println("입력한 정보가 저장되었습니다.");
+				}
+				else if(recheck.equalsIgnoreCase("N")) {
+					System.out.println("기존 정보를 유지합니다.");
+					redun.showPhoneInfo();
+				}
+			}
+		}
+	}
 	//입력
 	public void dataInput(int choice) {
 		
@@ -66,45 +64,25 @@ public class PhoneBookManager
 		System.out.println("전화번호:");
 		phoneNumber = scanner.nextLine();
 		
-		boolean recheck = true;
-		
 		if(user==SubMenuItem.NORMAL) {
-			
-			recheck=PhoneSet.add(new PhoneInfo(name, phoneNumber));
+			redun(name);
+			PhoneSet.add(new PhoneInfo(name, phoneNumber));
 		}
 		else if(user==SubMenuItem.SCHOOL) {
-			
 			System.out.println("전공:");
 			String major = scanner.nextLine();
 			System.out.println("학년:");
 			int grade = scanner.nextInt();
+			redun(name);
 			
-			recheck=PhoneSet.add(new PhoneSchoolInfo(name, phoneNumber, major, grade));
+			PhoneSet.add(new PhoneSchoolInfo(name, phoneNumber, major, grade));
 		}
 		else if(user==SubMenuItem.COMPANY) {
-			
 			System.out.println("회사:");
 			String companyName = scanner.nextLine();
+			redun(name);
 			
-			recheck=PhoneSet.add(new PhoneCompanyInfo(name, phoneNumber, companyName));
-			
-		}
-		
-		//중복체크
-		if(recheck==false) {
-			
-			System.out.println("이미 저장된 데이터입니다.");
-			System.out.println("덮어쓸까요? Y(y) / N(n)");
-			String rewrite = scanner.nextLine();
-			
-			///////////오류나는 부분//////////////
-			if(rewrite.equalsIgnoreCase("Y")) {
-				
-				System.out.println("입력한 정보가 저장되었습니다.");
-			}
-			else if(rewrite.equalsIgnoreCase("N")) {
-				System.out.println("기존 정보를 유지합니다.");
-			}
+			PhoneSet.add(new PhoneCompanyInfo(name, phoneNumber, companyName));
 		}
 		System.out.println("===입력이완료되었습니다===");
 	}
