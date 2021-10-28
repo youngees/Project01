@@ -6,6 +6,7 @@ public interface MenuItem
 	int SEARCH = 2;
 	int DELETE = 3;
 	int SHOW = 4;
-	int TERMINATE = 5;
+	int OPTION = 5;
+	int TERMINATE = 6;
 	
 }

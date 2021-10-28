@@ -8,35 +8,13 @@ import java.util.Scanner;
 public class PhoneBookManager
 {
 	
-	private HashSet<PhoneInfo> PhoneSet;
-	private int phoneData;
+	HashSet<PhoneInfo> PhoneSet =  new HashSet<PhoneInfo>();
 	
 	Scanner scanner = new Scanner(System.in);
 	
 	public PhoneBookManager(int num) {
 		PhoneSet = new HashSet<PhoneInfo>();
 	}
-//	//중복체크
-//	public void redun(String name) {
-//		String recheck;
-//		
-//		for(PhoneInfo redun : PhoneSet) {
-//			if(name.equals(redun.getName())){
-//				System.out.println("이미 저장된 데이터입니다.");
-//				System.out.println("덮어쓸까요? Y(y) / N(n)");
-//				recheck = scanner.nextLine();
-//				
-//				if(recheck.equalsIgnoreCase("Y")) {
-//					PhoneSet.remove(redun);
-//					System.out.println("입력한 정보가 저장되었습니다.");
-//				}
-//				else if(recheck.equalsIgnoreCase("N")) {
-//					System.out.println("기존 정보를 유지합니다.");
-//					redun.showPhoneInfo();
-//				}
-//			}
-//		}
-//	}
 	
 	//메뉴출력
 	public void printMenu() {
@@ -67,11 +45,11 @@ public class PhoneBookManager
 		System.out.println("전화번호:");
 		phoneNumber = scanner.nextLine();
 		
-		PhoneInfo poin = null; 
+		PhoneInfo phoneInfo = null;
 		
 		if(user==SubMenuItem.NORMAL) {
 			
-			poin = new PhoneInfo(name, phoneNumber);
+			phoneInfo = new PhoneInfo(name, phoneNumber);
 		}
 		else if(user==SubMenuItem.SCHOOL) {
 			
@@ -80,36 +58,36 @@ public class PhoneBookManager
 			System.out.println("학년:");
 			int grade = scanner.nextInt();
 			
-			poin =  new PhoneSchoolInfo(name, phoneNumber, major, grade);
+			phoneInfo = new PhoneSchoolInfo(name, phoneNumber, major, grade);
 		}
 		else if(user==SubMenuItem.COMPANY) {
 			
 			System.out.println("회사:");
 			String companyName = scanner.nextLine();
 			
-			poin = new PhoneCompanyInfo(name, phoneNumber, companyName);
+			phoneInfo = new PhoneCompanyInfo(name, phoneNumber, companyName);
 			
 		}
 		
 		//중복체크
-		boolean recheck = PhoneSet.add(poin);
-		if(recheck==false) {
-
+		boolean recheck = PhoneSet.add(phoneInfo);
+		if(recheck==true) {
+			System.out.println("===입력이완료되었습니다===");
+		}
+		else {
 			System.out.println("이미 저장된 데이터입니다.");
 			System.out.println("덮어쓸까요? Y(y) / N(n)");
 			String rewrite = scanner.nextLine();
 						
 			if(rewrite.equalsIgnoreCase("Y")) {
-				PhoneSet.remove(poin);
-				PhoneSet.add(poin);
+				PhoneSet.remove(phoneInfo);
+				PhoneSet.add(phoneInfo);
+				
 				System.out.println("입력한 정보가 저장되었습니다.");
 			}
 			else if(rewrite.equalsIgnoreCase("N")) {
 				System.out.println("기존 정보를 유지합니다.");	
 			}
-		}
-		else {
-			System.out.println("===입력이완료되었습니다===");
 		}
 	}
 	

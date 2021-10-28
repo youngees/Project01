@@ -2,8 +2,8 @@ package project1;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
 import project1.ver08.MenuSelectException;
+import project1.ver08.AutoSaverT;
 import project1.ver08.MenuItem;
 import project1.ver08.PhoneBookManager;
 import project1.ver08.PhoneInfo;
@@ -16,6 +16,7 @@ public class PhoneBookVer08
 		
 		Scanner scanner = new Scanner(System.in);
 		PhoneBookManager pbm = new PhoneBookManager(100);
+		AutoSaverT as = new AutoSaverT(pbm);
 
 		while(true) {
 			try {
@@ -27,26 +28,37 @@ public class PhoneBookVer08
 				switch(choice) {
 				case MenuItem.INPUT: 
 					//데이터 입력
-					pbm.dataInput(choice);
+					pbm.dataInput();
 					System.out.println();
 					break;
 				case MenuItem.SEARCH:
 					//데이터 검색
-					pbm.dataSearch(choice);
+					pbm.dataSearch();
 					System.out.println();
 					break;
 				case MenuItem.DELETE:
 					//데이터 삭제
-					pbm.dataDelete(choice);
+					pbm.dataDelete();
 					System.out.println();
 					break;
 				case MenuItem.SHOW:
 					//주소록 출력
-					pbm.dataAllShow(choice);
+					pbm.dataAllShow();
 					System.out.println();
+					break;
+				case MenuItem.OPTION:
+					//자동저장
+					if(!as.isAlive()) {
+						as = new AutoSaverT(pbm);
+						pbm.autosave(as);
+					}
+					else {
+						pbm.autosave(as);
+					}
 					break;
 				case MenuItem.TERMINATE:
 					//프로그램 종료
+					pbm.savePhoneInfo();
 					System.out.println("프로그램종료");
 					return;
 				}

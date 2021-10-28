@@ -1,0 +1,4 @@
+project1.ver08.PhoneInfo@33a43ae
+project1.ver08.PhoneCompanyInfo@23512b
+project1.ver08.PhoneInfo@478eab1
+project1.ver08.PhoneSchoolInfo@799409bf
