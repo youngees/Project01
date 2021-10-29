@@ -90,7 +90,7 @@ public class PhoneBookManager
 		
 		for(int i=0 ; i<phoneData ; i++) {
 			if(deleteName.compareTo(myPhone[i].name)==0) {
-
+				
 				myPhone[i] = null;
 				deleteIndex = i;
 				phoneData--;
