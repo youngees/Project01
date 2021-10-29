@@ -17,7 +17,7 @@ public class PhoneBookManager
 {
 	
 	HashSet<PhoneInfo> PhoneSet =  new HashSet<PhoneInfo>();
-	File dataPB = new File("src/project1/ver08/PhoneBook");
+	File dataPB = new File("src/project1/ver08/PhoneBook.obj");
 	
 	Scanner scanner = new Scanner(System.in);
 	
