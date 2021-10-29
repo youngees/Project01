@@ -12,7 +12,8 @@ public class DataInputSQL extends IConnectImpl
 	public void execute() {
 		try {
 			
-			String query = "INSERT INTO phonebook_tb VALUES (?, ?, ?, ?)";
+			String query = "INSERT INTO phonebook_tb VALUES "
+					+ " (seq_phonebook.NEXTVAL,?, ?, ?, ?)";
 			
 			psmt = con.prepareStatement(query);
 			
