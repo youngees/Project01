@@ -14,7 +14,7 @@ public interface IConnect {
 	멤버추상메서드
 		: public abstract가 붙어 추상메서드로 선언된다. 
 	 */
-	void connect(String name, String phoneNumber, String birth);//DB 연결 
+	void connect(String user, String pass);//DB 연결 
 	void execute();//쿼리 실행
 	void close();//자원 반납
 	

@@ -23,12 +23,12 @@ public class IConnectImpl implements IConnect {
 	public IConnectImpl() {
 		System.out.println("IConnectImpl 기본생성자 호출");
 	}
-	//인자생성자1 : 이름, 전화번호, 생년월일을 인자로 받음
-	public IConnectImpl(String name, String phoneNumber, String birth) {
+	//인자생성자1 : 아이디, 패스워드를 인자로 받음
+	public IConnectImpl(String user, String pass) {
 		System.out.println("IConnectImpl 인자생성자 호출");
 		try {
 			Class.forName(ORACLE_DRIVER);
-			connect(name, phoneNumber, birth);
+			connect(user, pass);
 		}
 		catch(ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패");
@@ -36,11 +36,11 @@ public class IConnectImpl implements IConnect {
 		}
 	}
 	//인자생성자2 : 드라이버명까지 인자로 받음
-	public IConnectImpl(String driver, String name, String phoneNumber, String birth) {
+	public IConnectImpl(String driver, String user, String pass) {
 		System.out.println("IConnectImpl 인자생성자 호출");
 		try {
 			Class.forName(driver);
-			connect(name, phoneNumber, birth);
+			connect(user, pass);
 		}
 		catch(ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패");
@@ -49,9 +49,9 @@ public class IConnectImpl implements IConnect {
 	}
 	//오라클에 연결
 	@Override
-	public void connect(String name, String phoneNumber, String birth) {
+	public void connect(String user, String pass) {
 		try {
-			con = DriverManager.getConnection(name, phoneNumber,birth);
+			con = DriverManager.getConnection(ORACLE_URL, user, pass);
 		}
 		catch(SQLException e) {
 			System.out.println("데이터베이스 연결 오류");
